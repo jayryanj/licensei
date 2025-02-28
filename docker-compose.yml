@@ -1,0 +1,19 @@
+services:
+  app:
+    container_name: licensei-app
+    build:
+      context: .
+    ports:
+      - "127.0.0.1:8080:80"
+  db:
+    container_name: licensei-db
+    image: postgres:16
+    environment:
+      - POSTGRES_DB=licensei
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./data:/var/lib/postgresql/data
