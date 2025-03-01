@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - main
+      - master
       - 2-create-rest-api-endpoints
   pull_request:
     branches:
       - main
+      - master
       - 2-create-rest-api-endpoints
 
 jobs:
