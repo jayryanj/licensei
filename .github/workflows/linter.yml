@@ -1,0 +1,40 @@
+name: Lint Code
+
+on:
+  push:
+    branches:
+      - main
+      - 2-create-rest-api-endpoints
+  pull_request:
+    branches:
+      - main
+      - 2-create-rest-api-endpoints
+
+jobs:
+  lint:
+    name: Run Python Linter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install ruff flake8 pylint  # Install linters
+
+      - name: Run Ruff Linter
+        run: ruff check .
+
+      - name: Run Flake8 (Optional)
+        run: flake8 .
+
+      - name: Run Pylint (Optional)
+        run: pylint $(git ls-files '*.py')
