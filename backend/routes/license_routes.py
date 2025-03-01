@@ -1,10 +1,11 @@
 from flask import Blueprint
+from backend.services import license_service
 
 licenses = Blueprint(name='licenses', import_name=__name__, url_prefix='/api')
 
 @licenses.get('/licenses')
 def list_licenses():
-    return "Not implemented", 501
+    return {"licenses": license_service.list_all_licenses()}, 200
 
 @licenses.get('/licenses/<license>')
 def validate_license(license):
