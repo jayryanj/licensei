@@ -1,6 +1,6 @@
 services:
   app:
-    container_name: licensei-app
+    container_name: licensei-backend
     build:
       context: .
     ports:
