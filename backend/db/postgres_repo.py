@@ -4,8 +4,6 @@ import psycopg2
 from flask import current_app
 from psycopg2 import DataError, DatabaseError
 
-from backend.db.license_type import LicenseType
-
 
 def __get_connection():
     # TODO move config out
@@ -38,19 +36,25 @@ def get_all_licenses():
         connection.close()
 
 
-def insert_license(new_license, license_type, expiration, product, description):
+def insert_license(new_license, license_type, expiry, product, description):
     connection = __get_connection()
     cursor = connection.cursor()
 
     try:
         cursor.execute('''
-            INSERT INTO license(license_key, product, created, expiration, type, description)
+            INSERT INTO license(
+            license_key,
+            product,
+            created,
+            expiration,
+            type,
+            description
+            )
             VALUES(%s, %s, DEFAULT, %s, %s, %s)
-        ''', (new_license, product, expiration, license_type, description))
+        ''', (new_license, product, expiry, license_type, description))
         connection.commit()
     except (DataError, DatabaseError) as e:
         # TODO implement proper error handling
         print(e)
     finally:
         connection.close()
-

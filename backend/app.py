@@ -4,7 +4,9 @@ import dotenv
 from backend.config import config
 from backend.routes import license_routes
 
+
 dotenv.load_dotenv()
+
 
 def create_app(config_name="default"):
     flask_app = Flask(__name__)

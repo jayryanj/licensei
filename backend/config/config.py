@@ -1,5 +1,6 @@
 import os
 
+
 class Config:
     DB_NAME = os.getenv("PG_NAME") or "licensei"
     DB_USER = os.getenv("PG_USER") or "user"
