@@ -5,12 +5,11 @@ on:
     branches:
       - main
       - master
-      - 2-create-rest-api-endpoints
+      - jayryanj/dev
   pull_request:
     branches:
       - main
       - master
-      - 2-create-rest-api-endpoints
 
 jobs:
   lint:
@@ -24,7 +23,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
       - name: Install Dependencies
         run: |
