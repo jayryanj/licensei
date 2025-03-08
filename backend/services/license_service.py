@@ -1,6 +1,5 @@
 import string
 from datetime import datetime
-from errno import EROFS
 
 from backend.db import postgres_repo
 import secrets
@@ -24,7 +23,7 @@ def create_new_license(product: str, expiration: str, description: str, license_
 
     try:
         if license_type not in (t.name for t in LicenseType):
-            raise ValueError(f"Invalid value for license_type")
+            raise ValueError(f"Invalid value for license_type: {license_type}")
         license_type = LicenseType[license_type].name
 
         if license_type != LicenseType.perpetual.name and not expiration:
@@ -43,7 +42,7 @@ def create_new_license(product: str, expiration: str, description: str, license_
             license_type=license_type
         )
         return new_license
-    except ValueError as ve:
+    except ValueError:
         # TODO implement custom exception to return 400. For now, this simply returns HTTP 200 {"license": null}
         # ValueError will be raised in two cases: 1) license_type is incorrect 2) expiration is incorrect
         pass

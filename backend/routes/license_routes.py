@@ -1,6 +1,5 @@
 from flask import Blueprint, request
 
-from backend.db.license_type import LicenseType
 from backend.services import license_service
 
 licenses = Blueprint(name='licenses', import_name=__name__, url_prefix='/api')

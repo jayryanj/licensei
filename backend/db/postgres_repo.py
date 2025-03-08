@@ -4,7 +4,6 @@ import psycopg2
 from flask import current_app
 from psycopg2 import DataError, DatabaseError
 
-from backend.db.license_type import LicenseType
 
 
 def __get_connection():
